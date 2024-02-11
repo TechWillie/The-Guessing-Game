@@ -1,6 +1,4 @@
 const colors = require('colors')
-
-
 const readline = require("readline");
 // create an interface where we can talk to the user
 const rl = readline.createInterface({
@@ -21,37 +19,28 @@ function secretNuumber(){
             const hN = Number(highNum)
             const randNum = genNum(lN, hN)
             console.log(randNum);
-            askGuess()
-            function askGuess(){
-                rl.question("Before we begin, How many guesses you want...? ", amount =>{
-                    let _amount = Number(amount)
-                    rl.question("Please enter your first guess...? ", guess1 => {
-                        let guess = Number(guess1)
-                        console.log(`you guessed ${guess}`.bgGreen);
-                        // console.log(_amount);
-                        checkGuess(guess, _amount, randNum)
-                        return askGuess
-                    })
+            rl.question("Before we begin, How many guesses you want...? ", amount =>{
+                let _amount = Number(amount)
+                rl.question("Please enter your first guess...? ", guess1 => {
+                    let guess = Number(guess1)
+                    console.log(`you guessed ${guess}`.bgGreen);
+                    checkGuess(guess, _amount, randNum);
                 })
-
-            }
-
-
-
+            })
         })
     })
     return secretNuumber
 }
 
 function checkGuess(num, count = 0, n){
-    console.log(count);
+    console.log(`You have ${count} guesses left.`.bgYellow);
     if(count === 1){
         console.log("Sorry the game is over and youy lost..");
         rl.close()
         return true
     }
     if(num > n){
-        console.log("To High");
+        console.log("To High".rainbow);
         rl.question("Whooo boy.. You're a bit oveer. Plesase, Guess again...", guess1 => {
             let guess = Number(guess1)
             console.log(`OK.. You guessed ${guess}, and that's`);
